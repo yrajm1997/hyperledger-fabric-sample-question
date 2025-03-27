@@ -71,7 +71,7 @@ CHANNEL_NAME="mychannel"
 CC_RUNTIME_LANGUAGE="golang"
 VERSION="1"
 CC_SRC_PATH="./artifacts/chaincode"
-CC_NAME="trade-network"
+CC_NAME="patient-record"
 
 packageChaincode() {
     setGlobalsForPeer0Clinic

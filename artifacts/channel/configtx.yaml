@@ -35,15 +35,15 @@ Organizations:
                 Type: Signature
                 Rule: "OR('OrdererMSP.admin')"
 
-    - &Hospital
+    - &Clinic
         # DefaultOrg defines the organization which is used in the sampleconfig
         # of the fabric.git development environment
-        Name: HospitalMSP
+        Name: ClinicMSP
 
         # ID to load the MSP definition as
-        ID: HospitalMSP
+        ID: ClinicMSP
 
-        MSPDir: crypto-config/peerOrganizations/hospital.example.com/msp
+        MSPDir: crypto-config/peerOrganizations/clinic.example.com/msp
 
         # Policies defines the set of policies at this level of the config tree
         # For organization policies, their canonical path is usually
@@ -51,34 +51,34 @@ Organizations:
         Policies:
             Readers:
                 Type: Signature
-                Rule: "OR('HospitalMSP.admin', 'HospitalMSP.peer', 'HospitalMSP.client')"
+                Rule: "OR('ClinicMSP.admin', 'ClinicMSP.peer', 'ClinicMSP.client')"
             Writers:
                 Type: Signature
-                Rule: "OR('HospitalMSP.admin', 'HospitalMSP.client')"
+                Rule: "OR('ClinicMSP.admin', 'ClinicMSP.client')"
             Admins:
                 Type: Signature
-                Rule: "OR('HospitalMSP.admin')"
+                Rule: "OR('ClinicMSP.admin')"
             Endorsement:
                 Type: Signature
-                Rule: "OR('HospitalMSP.peer')"
+                Rule: "OR('ClinicMSP.peer')"
 
         # leave this flag set to true.
         AnchorPeers:
             # AnchorPeers defines the location of peers which can be used
             # for cross org gossip communication.  Note, this value is only
             # encoded in the genesis block in the Application section context
-            - Host: peer0.hospital.example.com
+            - Host: peer0.clinic.example.com
               Port: 7051
 
-    - &InsuranceCompany
+    - &ClinicManagement
         # DefaultOrg defines the organization which is used in the sampleconfig
         # of the fabric.git development environment
-        Name: InsuranceCompanyMSP
+        Name: ClinicManagementMSP
 
         # ID to load the MSP definition as
-        ID: InsuranceCompanyMSP
+        ID: ClinicManagementMSP
 
-        MSPDir: crypto-config/peerOrganizations/insurancecompany.example.com/msp
+        MSPDir: crypto-config/peerOrganizations/clinicmanagement.example.com/msp
 
         # Policies defines the set of policies at this level of the config tree
         # For organization policies, their canonical path is usually
@@ -86,33 +86,33 @@ Organizations:
         Policies:
             Readers:
                 Type: Signature
-                Rule: "OR('InsuranceCompanyMSP.admin', 'InsuranceCompanyMSP.peer', 'InsuranceCompanyMSP.client')"
+                Rule: "OR('ClinicManagementMSP.admin', 'ClinicManagementMSP.peer', 'ClinicManagementMSP.client')"
             Writers:
                 Type: Signature
-                Rule: "OR('InsuranceCompanyMSP.admin', 'InsuranceCompanyMSP.client')"
+                Rule: "OR('ClinicManagementMSP.admin', 'ClinicManagementMSP.client')"
             Admins:
                 Type: Signature
-                Rule: "OR('InsuranceCompanyMSP.admin')"
+                Rule: "OR('ClinicManagementMSP.admin')"
             Endorsement:
                 Type: Signature
-                Rule: "OR('InsuranceCompanyMSP.peer')"
+                Rule: "OR('ClinicManagementMSP.peer')"
 
         AnchorPeers:
             # AnchorPeers defines the location of peers which can be used
             # for cross org gossip communication.  Note, this value is only
             # encoded in the genesis block in the Application section context
-            - Host: peer0.insurancecompany.example.com
+            - Host: peer0.clinicmanagement.example.com
               Port: 9051
 
-    - &Pharmacy
+    - &MedicalStore
         # DefaultOrg defines the organization which is used in the sampleconfig
         # of the fabric.git development environment
-        Name: PharmacyMSP
+        Name: MedicalStoreMSP
 
         # ID to load the MSP definition as
-        ID: PharmacyMSP
+        ID: MedicalStoreMSP
 
-        MSPDir: crypto-config/peerOrganizations/pharmacy.example.com/msp
+        MSPDir: crypto-config/peerOrganizations/medicalstore.example.com/msp
 
         # Policies defines the set of policies at this level of the config tree
         # For organization policies, their canonical path is usually
@@ -120,22 +120,22 @@ Organizations:
         Policies:
             Readers:
                 Type: Signature
-                Rule: "OR('PharmacyMSP.admin', 'PharmacyMSP.peer', 'PharmacyMSP.client')"
+                Rule: "OR('MedicalStoreMSP.admin', 'MedicalStoreMSP.peer', 'MedicalStoreMSP.client')"
             Writers:
                 Type: Signature
-                Rule: "OR('PharmacyMSP.admin', 'PharmacyMSP.client')"
+                Rule: "OR('MedicalStoreMSP.admin', 'MedicalStoreMSP.client')"
             Admins:
                 Type: Signature
-                Rule: "OR('PharmacyMSP.admin')"
+                Rule: "OR('MedicalStoreMSP.admin')"
             Endorsement:
                 Type: Signature
-                Rule: "OR('PharmacyMSP.peer')"
+                Rule: "OR('MedicalStoreMSP.peer')"
 
         AnchorPeers:
             # AnchorPeers defines the location of peers which can be used
             # for cross org gossip communication.  Note, this value is only
             # encoded in the genesis block in the Application section context
-            - Host: peer0.pharmacy.example.com
+            - Host: peer0.medicalstore.example.com
               Port: 11051
 
 ################################################################################
@@ -342,9 +342,9 @@ Profiles:
         Application:
             <<: *ApplicationDefaults
             Organizations:
-                - *Hospital
-                - *InsuranceCompany
-                - *Pharmacy
+                - *Clinic
+                - *ClinicManagement
+                - *MedicalStore
             Capabilities:
                 <<: *ApplicationCapabilities
 
@@ -371,6 +371,6 @@ Profiles:
         Consortiums:
             SampleConsortium:
                 Organizations:
-                - *Hospital
-                - *InsuranceCompany
-                - *Pharmacy
+                - *Clinic
+                - *ClinicManagement
+                - *MedicalStore

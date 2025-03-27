@@ -23,8 +23,8 @@ PeerOrgs:
   # ---------------------------------------------------------------------------
   # Orgs
   # ---------------------------------------------------------------------------
-  - Name: Hospital
-    Domain: hospital.example.com
+  - Name: Clinic
+    Domain: clinic.example.com
     EnableNodeOUs: true
 
     Template:
@@ -37,8 +37,8 @@ PeerOrgs:
     Users:
       Count: 1
 
-  - Name: InsuranceCompany
-    Domain: insurancecompany.example.com
+  - Name: ClinicManagement
+    Domain: clinicmanagement.example.com
     EnableNodeOUs: true
 
     Template:
@@ -50,8 +50,8 @@ PeerOrgs:
 
     Users:
       Count: 1
-  - Name: Pharmacy
-    Domain: pharmacy.example.com
+  - Name: MedicalStore
+    Domain: medicalstore.example.com
     EnableNodeOUs: true
 
     Template:

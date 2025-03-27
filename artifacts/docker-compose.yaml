@@ -4,66 +4,66 @@ networks:
   test:
 
 services:
-  ca-hospital:
+  ca-clinic:
     image: hyperledger/fabric-ca
     environment:
       - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
-      - FABRIC_CA_SERVER_CA_NAME=ca.hospital.example.com
-      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.hospital.example.com-cert.pem
+      - FABRIC_CA_SERVER_CA_NAME=ca.clinic.example.com
+      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.clinic.example.com-cert.pem
       - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/priv_sk
       - FABRIC_CA_SERVER_TLS_ENABLED=true
-      - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-tls/tlsca.hospital.example.com-cert.pem
+      - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-tls/tlsca.clinic.example.com-cert.pem
       - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-tls/priv_sk
     ports:
       - "7054:7054"
     command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
     volumes:
-      - ./channel/crypto-config/peerOrganizations/hospital.example.com/ca/:/etc/hyperledger/fabric-ca-server-config
-      - ./channel/crypto-config/peerOrganizations/hospital.example.com/tlsca/:/etc/hyperledger/fabric-ca-server-tls
-    container_name: ca.hospital.example.com
-    hostname: ca.hospital.example.com
+      - ./channel/crypto-config/peerOrganizations/clinic.example.com/ca/:/etc/hyperledger/fabric-ca-server-config
+      - ./channel/crypto-config/peerOrganizations/clinic.example.com/tlsca/:/etc/hyperledger/fabric-ca-server-tls
+    container_name: ca.clinic.example.com
+    hostname: ca.clinic.example.com
     networks:
       - test
 
-  ca-insurancecompany:
+  ca-clinicmanagement:
     image: hyperledger/fabric-ca
     environment:
       - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
-      - FABRIC_CA_SERVER_CA_NAME=ca.insurancecompany.example.com
-      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.insurancecompany.example.com-cert.pem
+      - FABRIC_CA_SERVER_CA_NAME=ca.clinicmanagement.example.com
+      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.clinicmanagement.example.com-cert.pem
       - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/priv_sk
       - FABRIC_CA_SERVER_TLS_ENABLED=true
-      - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-tls/tlsca.insurancecompany.example.com-cert.pem
+      - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-tls/tlsca.clinicmanagement.example.com-cert.pem
       - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-tls/priv_sk
     ports:
       - "8054:7054"
     command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
     volumes:
-      - ./channel/crypto-config/peerOrganizations/insurancecompany.example.com/ca/:/etc/hyperledger/fabric-ca-server-config
-      - ./channel/crypto-config/peerOrganizations/insurancecompany.example.com/tlsca/:/etc/hyperledger/fabric-ca-server-tls
-    container_name: ca.insurancecompany.example.com
-    hostname: ca.insurancecompany.example.com
+      - ./channel/crypto-config/peerOrganizations/clinicmanagement.example.com/ca/:/etc/hyperledger/fabric-ca-server-config
+      - ./channel/crypto-config/peerOrganizations/clinicmanagement.example.com/tlsca/:/etc/hyperledger/fabric-ca-server-tls
+    container_name: ca.clinicmanagement.example.com
+    hostname: ca.clinicmanagement.example.com
     networks:
       - test
 
-  ca-pharmacy:
+  ca-medicalstore:
     image: hyperledger/fabric-ca
     environment:
       - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
-      - FABRIC_CA_SERVER_CA_NAME=ca.pharmacy.example.com
-      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.pharmacy.example.com-cert.pem
+      - FABRIC_CA_SERVER_CA_NAME=ca.medicalstore.example.com
+      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.medicalstore.example.com-cert.pem
       - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/priv_sk
       - FABRIC_CA_SERVER_TLS_ENABLED=true
-      - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-tls/tlsca.pharmacy.example.com-cert.pem
+      - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-tls/tlsca.medicalstore.example.com-cert.pem
       - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-tls/priv_sk
     ports:
       - "9054:7054"
     command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
     volumes:
-      - ./channel/crypto-config/peerOrganizations/pharmacy.example.com/ca/:/etc/hyperledger/fabric-ca-server-config
-      - ./channel/crypto-config/peerOrganizations/pharmacy.example.com/tlsca/:/etc/hyperledger/fabric-ca-server-tls
-    container_name: ca.pharmacy.example.com
-    hostname: ca.pharmacy.example.com
+      - ./channel/crypto-config/peerOrganizations/medicalstore.example.com/ca/:/etc/hyperledger/fabric-ca-server-config
+      - ./channel/crypto-config/peerOrganizations/medicalstore.example.com/tlsca/:/etc/hyperledger/fabric-ca-server-tls
+    container_name: ca.medicalstore.example.com
+    hostname: ca.medicalstore.example.com
     networks:
       - test
 
@@ -157,25 +157,25 @@ services:
     networks:
       - test
 
-  peer0.hospital.example.com:
-    container_name: peer0.hospital.example.com
+  peer0.clinic.example.com:
+    container_name: peer0.clinic.example.com
     extends:
       file: base.yaml
       service: peer-base
     environment:
       - FABRIC_LOGGING_SPEC=DEBUG
       - ORDERER_GENERAL_LOGLEVEL=DEBUG
-      - CORE_PEER_LOCALMSPID=HospitalMSP
+      - CORE_PEER_LOCALMSPID=ClinicMSP
 
       - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=artifacts_test
 
-      - CORE_PEER_ID=peer0.hospital.example.com
-      - CORE_PEER_ADDRESS=peer0.hospital.example.com:7051
+      - CORE_PEER_ID=peer0.clinic.example.com
+      - CORE_PEER_ADDRESS=peer0.clinic.example.com:7051
       - CORE_PEER_LISTENADDRESS=0.0.0.0:7051
-      - CORE_PEER_CHAINCODEADDRESS=peer0.hospital.example.com:7052
+      - CORE_PEER_CHAINCODEADDRESS=peer0.clinic.example.com:7052
       - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:7052
-      - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.hospital.example.com:8051
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.hospital.example.com:7051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.clinic.example.com:8051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.clinic.example.com:7051
 
       # - CORE_OPERATIONS_LISTENADDRESS=0.0.0.0:9440
 
@@ -194,32 +194,32 @@ services:
     ports:
       - 7051:7051
     volumes:
-      - ./channel/crypto-config/peerOrganizations/hospital.example.com/peers/peer0.hospital.example.com/msp:/etc/hyperledger/crypto/peer/msp
-      - ./channel/crypto-config/peerOrganizations/hospital.example.com/peers/peer0.hospital.example.com/tls:/etc/hyperledger/crypto/peer/tls
+      - ./channel/crypto-config/peerOrganizations/clinic.example.com/peers/peer0.clinic.example.com/msp:/etc/hyperledger/crypto/peer/msp
+      - ./channel/crypto-config/peerOrganizations/clinic.example.com/peers/peer0.clinic.example.com/tls:/etc/hyperledger/crypto/peer/tls
       - /var/run/:/host/var/run/
       - ./channel/:/etc/hyperledger/channel/
     networks:
       - test
 
-  peer1.hospital.example.com:
-    container_name: peer1.hospital.example.com
+  peer1.clinic.example.com:
+    container_name: peer1.clinic.example.com
     extends:
       file: base.yaml
       service: peer-base
     environment:
       - FABRIC_LOGGING_SPEC=DEBUG
       - ORDERER_GENERAL_LOGLEVEL=debug
-      - CORE_PEER_LOCALMSPID=HospitalMSP
+      - CORE_PEER_LOCALMSPID=ClinicMSP
 
       - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=artifacts_test
 
-      - CORE_PEER_ID=peer1.hospital.example.com
-      - CORE_PEER_ADDRESS=peer1.hospital.example.com:8051
+      - CORE_PEER_ID=peer1.clinic.example.com
+      - CORE_PEER_ADDRESS=peer1.clinic.example.com:8051
       - CORE_PEER_LISTENADDRESS=0.0.0.0:8051
-      - CORE_PEER_CHAINCODEADDRESS=peer1.hospital.example.com:8052
+      - CORE_PEER_CHAINCODEADDRESS=peer1.clinic.example.com:8052
       - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:8052
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.hospital.example.com:8051
-      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.hospital.example.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.clinic.example.com:8051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.clinic.example.com:7051
 
       - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
       - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb1:5984
@@ -235,32 +235,32 @@ services:
     ports:
       - 8051:8051
     volumes:
-      - ./channel/crypto-config/peerOrganizations/hospital.example.com/peers/peer1.hospital.example.com/msp:/etc/hyperledger/crypto/peer/msp
-      - ./channel/crypto-config/peerOrganizations/hospital.example.com/peers/peer1.hospital.example.com/tls:/etc/hyperledger/crypto/peer/tls
+      - ./channel/crypto-config/peerOrganizations/clinic.example.com/peers/peer1.clinic.example.com/msp:/etc/hyperledger/crypto/peer/msp
+      - ./channel/crypto-config/peerOrganizations/clinic.example.com/peers/peer1.clinic.example.com/tls:/etc/hyperledger/crypto/peer/tls
       - /var/run/:/host/var/run/
       - ./channel/:/etc/hyperledger/channel/
     networks:
       - test
 
-  peer0.insurancecompany.example.com:
-    container_name: peer0.insurancecompany.example.com
+  peer0.clinicmanagement.example.com:
+    container_name: peer0.clinicmanagement.example.com
     extends:
       file: base.yaml
       service: peer-base
     environment:
       - FABRIC_LOGGING_SPEC=DEBUG
       - ORDERER_GENERAL_LOGLEVEL=debug
-      - CORE_PEER_LOCALMSPID=InsuranceCompanyMSP
+      - CORE_PEER_LOCALMSPID=ClinicManagementMSP
 
       - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=artifacts_test
 
-      - CORE_PEER_ID=peer0.insurancecompany.example.com
-      - CORE_PEER_ADDRESS=peer0.insurancecompany.example.com:9051
+      - CORE_PEER_ID=peer0.clinicmanagement.example.com
+      - CORE_PEER_ADDRESS=peer0.clinicmanagement.example.com:9051
       - CORE_PEER_LISTENADDRESS=0.0.0.0:9051
-      - CORE_PEER_CHAINCODEADDRESS=peer0.insurancecompany.example.com:9052
+      - CORE_PEER_CHAINCODEADDRESS=peer0.clinicmanagement.example.com:9052
       - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:9052
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.insurancecompany.example.com:9051
-      - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.insurancecompany.example.com:10051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.clinicmanagement.example.com:9051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.clinicmanagement.example.com:10051
 
       - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
       - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb2:5984
@@ -276,32 +276,32 @@ services:
     ports:
       - 9051:9051
     volumes:
-      - ./channel/crypto-config/peerOrganizations/insurancecompany.example.com/peers/peer0.insurancecompany.example.com/msp:/etc/hyperledger/crypto/peer/msp
-      - ./channel/crypto-config/peerOrganizations/insurancecompany.example.com/peers/peer0.insurancecompany.example.com/tls:/etc/hyperledger/crypto/peer/tls
+      - ./channel/crypto-config/peerOrganizations/clinicmanagement.example.com/peers/peer0.clinicmanagement.example.com/msp:/etc/hyperledger/crypto/peer/msp
+      - ./channel/crypto-config/peerOrganizations/clinicmanagement.example.com/peers/peer0.clinicmanagement.example.com/tls:/etc/hyperledger/crypto/peer/tls
       - /var/run/:/host/var/run/
       - ./channel/:/etc/hyperledger/channel/
     networks:
       - test
 
-  peer1.insurancecompany.example.com:
-    container_name: peer1.insurancecompany.example.com
+  peer1.clinicmanagement.example.com:
+    container_name: peer1.clinicmanagement.example.com
     extends:
       file: base.yaml
       service: peer-base
     environment:
       - FABRIC_LOGGING_SPEC=DEBUG
       - ORDERER_GENERAL_LOGLEVEL=debug
-      - CORE_PEER_LOCALMSPID=InsuranceCompanyMSP
+      - CORE_PEER_LOCALMSPID=ClinicManagementMSP
 
       - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=artifacts_test
 
-      - CORE_PEER_ID=peer1.insurancecompany.example.com
-      - CORE_PEER_ADDRESS=peer1.insurancecompany.example.com:10051
+      - CORE_PEER_ID=peer1.clinicmanagement.example.com
+      - CORE_PEER_ADDRESS=peer1.clinicmanagement.example.com:10051
       - CORE_PEER_LISTENADDRESS=0.0.0.0:10051
-      - CORE_PEER_CHAINCODEADDRESS=peer1.insurancecompany.example.com:10052
+      - CORE_PEER_CHAINCODEADDRESS=peer1.clinicmanagement.example.com:10052
       - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:10052
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.insurancecompany.example.com:10051
-      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.insurancecompany.example.com:9051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.clinicmanagement.example.com:10051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.clinicmanagement.example.com:9051
 
       - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
       - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb3:5984
@@ -317,32 +317,32 @@ services:
     ports:
       - 10051:10051
     volumes:
-      - ./channel/crypto-config/peerOrganizations/insurancecompany.example.com/peers/peer1.insurancecompany.example.com/msp:/etc/hyperledger/crypto/peer/msp
-      - ./channel/crypto-config/peerOrganizations/insurancecompany.example.com/peers/peer1.insurancecompany.example.com/tls:/etc/hyperledger/crypto/peer/tls
+      - ./channel/crypto-config/peerOrganizations/clinicmanagement.example.com/peers/peer1.clinicmanagement.example.com/msp:/etc/hyperledger/crypto/peer/msp
+      - ./channel/crypto-config/peerOrganizations/clinicmanagement.example.com/peers/peer1.clinicmanagement.example.com/tls:/etc/hyperledger/crypto/peer/tls
       - /var/run/:/host/var/run/
       - ./channel/:/etc/hyperledger/channel/
     networks:
       - test
 
-  peer0.pharmacy.example.com:
-    container_name: peer0.pharmacy.example.com
+  peer0.medicalstore.example.com:
+    container_name: peer0.medicalstore.example.com
     extends:
       file: base.yaml
       service: peer-base
     environment:
       - FABRIC_LOGGING_SPEC=DEBUG
       - ORDERER_GENERAL_LOGLEVEL=DEBUG
-      - CORE_PEER_LOCALMSPID=PharmacyMSP
+      - CORE_PEER_LOCALMSPID=MedicalStoreMSP
 
       - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=artifacts_test
 
-      - CORE_PEER_ID=peer0.pharmacy.example.com
-      - CORE_PEER_ADDRESS=peer0.pharmacy.example.com:7051
+      - CORE_PEER_ID=peer0.medicalstore.example.com
+      - CORE_PEER_ADDRESS=peer0.medicalstore.example.com:7051
       - CORE_PEER_LISTENADDRESS=0.0.0.0:7051
-      - CORE_PEER_CHAINCODEADDRESS=peer0.pharmacy.example.com:7052
+      - CORE_PEER_CHAINCODEADDRESS=peer0.medicalstore.example.com:7052
       - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:7052
       - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.org1.example.com:8051
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.pharmacy.example.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.medicalstore.example.com:7051
 
       # - CORE_OPERATIONS_LISTENADDRESS=0.0.0.0:9440
 
@@ -361,8 +361,8 @@ services:
     ports:
       - 11051:7051
     volumes:
-      - ./channel/crypto-config/peerOrganizations/pharmacy.example.com/peers/peer0.pharmacy.example.com/msp:/etc/hyperledger/crypto/peer/msp
-      - ./channel/crypto-config/peerOrganizations/pharmacy.example.com/peers/peer0.pharmacy.example.com/tls:/etc/hyperledger/crypto/peer/tls
+      - ./channel/crypto-config/peerOrganizations/medicalstore.example.com/peers/peer0.medicalstore.example.com/msp:/etc/hyperledger/crypto/peer/msp
+      - ./channel/crypto-config/peerOrganizations/medicalstore.example.com/peers/peer0.medicalstore.example.com/tls:/etc/hyperledger/crypto/peer/tls
       - /var/run/:/host/var/run/
       - ./:/etc/hyperledger/channel/
     networks:

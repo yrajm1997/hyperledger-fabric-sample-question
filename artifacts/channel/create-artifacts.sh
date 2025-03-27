@@ -13,11 +13,11 @@ configtxgen -profile OrdererGenesis -configPath . -channelID $SYS_CHANNEL  -outp
 # Generate channel configuration block
 configtxgen -profile BasicChannel -configPath . -outputCreateChannelTx ./mychannel.tx -channelID $CHANNEL_NAME
 
-echo "#######    Generating anchor peer update for HospitalMSP  ##########"
-configtxgen -profile BasicChannel -configPath . -outputAnchorPeersUpdate ./HospitalMSPanchors.tx -channelID $CHANNEL_NAME -asOrg HospitalMSP
+echo "#######    Generating anchor peer update for ClinicMSP  ##########"
+configtxgen -profile BasicChannel -configPath . -outputAnchorPeersUpdate ./ClinicMSPanchors.tx -channelID $CHANNEL_NAME -asOrg ClinicMSP
 
-echo "#######    Generating anchor peer update for InsuranceCompanyMSP  ##########"
-configtxgen -profile BasicChannel -configPath . -outputAnchorPeersUpdate ./InsuranceCompanyMSPanchors.tx -channelID $CHANNEL_NAME -asOrg InsuranceCompanyMSP
+echo "#######    Generating anchor peer update for ClinicManagementMSP  ##########"
+configtxgen -profile BasicChannel -configPath . -outputAnchorPeersUpdate ./ClinicManagementMSPanchors.tx -channelID $CHANNEL_NAME -asOrg ClinicManagementMSP
 
-echo "#######    Generating anchor peer update for PharmacyMSP  ##########"
-configtxgen -profile BasicChannel -configPath . -outputAnchorPeersUpdate ./PharmacyMSPanchors.tx -channelID $CHANNEL_NAME -asOrg PharmacyMSP
+echo "#######    Generating anchor peer update for MedicalStoreMSP  ##########"
+configtxgen -profile BasicChannel -configPath . -outputAnchorPeersUpdate ./MedicalStoreMSPanchors.tx -channelID $CHANNEL_NAME -asOrg MedicalStoreMSP

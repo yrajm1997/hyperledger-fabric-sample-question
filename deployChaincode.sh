@@ -1,8 +1,8 @@
 export CORE_PEER_TLS_ENABLED=true
 export ORDERER_CA=${PWD}/artifacts/channel/crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
-export PEER0_HOSPITAL_CA=${PWD}/artifacts/channel/crypto-config/peerOrganizations/hospital.example.com/peers/peer0.hospital.example.com/tls/ca.crt
-export PEER0_INSURANCECOMPANY_CA=${PWD}/artifacts/channel/crypto-config/peerOrganizations/insurancecompany.example.com/peers/peer0.insurancecompany.example.com/tls/ca.crt
-export PEER0_PHARMACY_CA=${PWD}/artifacts/channel/crypto-config/peerOrganizations/pharmacy.example.com/peers/peer0.pharmacy.example.com/tls/ca.crt
+export PEER0_CLINIC_CA=${PWD}/artifacts/channel/crypto-config/peerOrganizations/clinic.example.com/peers/peer0.clinic.example.com/tls/ca.crt
+export PEER0_CLINICMANAGEMENT_CA=${PWD}/artifacts/channel/crypto-config/peerOrganizations/clinicmanagement.example.com/peers/peer0.clinicmanagement.example.com/tls/ca.crt
+export PEER0_MEDICALSTORE_CA=${PWD}/artifacts/channel/crypto-config/peerOrganizations/medicalstore.example.com/peers/peer0.medicalstore.example.com/tls/ca.crt
 export FABRIC_CFG_PATH=${PWD}/artifacts/channel/config/
 
 export ORDERER_CA=${PWD}/artifacts/channel/crypto-config/ordererOrganizations/example.com/msp/tlscacerts/tlsca.example.com-cert.pem
@@ -18,41 +18,41 @@ setGlobalsForOrderer() {
 
 }
 
-setGlobalsForPeer0Hospital(){
-    export CORE_PEER_LOCALMSPID="HospitalMSP"
-    export CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_HOSPITAL_CA
-    export CORE_PEER_MSPCONFIGPATH=${PWD}/artifacts/channel/crypto-config/peerOrganizations/hospital.example.com/users/Admin@hospital.example.com/msp
+setGlobalsForPeer0Clinic(){
+    export CORE_PEER_LOCALMSPID="ClinicMSP"
+    export CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_CLINIC_CA
+    export CORE_PEER_MSPCONFIGPATH=${PWD}/artifacts/channel/crypto-config/peerOrganizations/clinic.example.com/users/Admin@clinic.example.com/msp
     export CORE_PEER_ADDRESS=localhost:7051
 }
 
-setGlobalsForPeer1Hospital(){
-    export CORE_PEER_LOCALMSPID="HospitalMSP"
-    export CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_HOSPITAL_CA
-    export CORE_PEER_MSPCONFIGPATH=${PWD}/artifacts/channel/crypto-config/peerOrganizations/hospital.example.com/users/Admin@hospital.example.com/msp
+setGlobalsForPeer1Clinic(){
+    export CORE_PEER_LOCALMSPID="ClinicMSP"
+    export CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_CLINIC_CA
+    export CORE_PEER_MSPCONFIGPATH=${PWD}/artifacts/channel/crypto-config/peerOrganizations/clinic.example.com/users/Admin@clinic.example.com/msp
     export CORE_PEER_ADDRESS=localhost:8051
     
 }
 
-setGlobalsForPeer0InsuranceCompany(){
-    export CORE_PEER_LOCALMSPID="InsuranceCompanyMSP"
-    export CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_INSURANCECOMPANY_CA
-    export CORE_PEER_MSPCONFIGPATH=${PWD}/artifacts/channel/crypto-config/peerOrganizations/insurancecompany.example.com/users/Admin@insurancecompany.example.com/msp
+setGlobalsForPeer0ClinicManagement(){
+    export CORE_PEER_LOCALMSPID="ClinicManagementMSP"
+    export CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_CLINICMANAGEMENT_CA
+    export CORE_PEER_MSPCONFIGPATH=${PWD}/artifacts/channel/crypto-config/peerOrganizations/clinicmanagement.example.com/users/Admin@clinicmanagement.example.com/msp
     export CORE_PEER_ADDRESS=localhost:9051
     
 }
 
-setGlobalsForPeer1InsuranceCompany(){
-    export CORE_PEER_LOCALMSPID="InsuranceCompanyMSP"
-    export CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_INSURANCECOMPANY_CA
-    export CORE_PEER_MSPCONFIGPATH=${PWD}/artifacts/channel/crypto-config/peerOrganizations/insurancecompany.example.com/users/Admin@insurancecompany.example.com/msp
+setGlobalsForPeer1ClinicManagement(){
+    export CORE_PEER_LOCALMSPID="ClinicManagementMSP"
+    export CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_CLINICMANAGEMENT_CA
+    export CORE_PEER_MSPCONFIGPATH=${PWD}/artifacts/channel/crypto-config/peerOrganizations/clinicmanagement.example.com/users/Admin@clinicmanagement.example.com/msp
     export CORE_PEER_ADDRESS=localhost:10051
     
 }
 
-setGlobalsForPeer0Pharmacy() {
-    export CORE_PEER_LOCALMSPID="PharmacyMSP"
-    export CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_PHARMACY_CA
-    export CORE_PEER_MSPCONFIGPATH=${PWD}/artifacts/channel/crypto-config/peerOrganizations/pharmacy.example.com/users/Admin@pharmacy.example.com/msp
+setGlobalsForPeer0MedicalStore() {
+    export CORE_PEER_LOCALMSPID="MedicalStoreMSP"
+    export CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_MEDICALSTORE_CA
+    export CORE_PEER_MSPCONFIGPATH=${PWD}/artifacts/channel/crypto-config/peerOrganizations/medicalstore.example.com/users/Admin@medicalstore.example.com/msp
     export CORE_PEER_ADDRESS=localhost:11051
 
 }
@@ -74,45 +74,45 @@ CC_SRC_PATH="./artifacts/chaincode"
 CC_NAME="trade-network"
 
 packageChaincode() {
-    setGlobalsForPeer0Hospital
+    setGlobalsForPeer0Clinic
     peer lifecycle chaincode package ${CC_NAME}.tar.gz \
         --path ${CC_SRC_PATH} --lang ${CC_RUNTIME_LANGUAGE} \
         --label ${CC_NAME}_${VERSION}
-    echo "===================== Chaincode is packaged on peer0.hospital ===================== "
+    echo "===================== Chaincode is packaged on peer0.clinic ===================== "
 }
 
 # packageChaincode
 
 installChaincode() {
-    setGlobalsForPeer0Hospital
+    setGlobalsForPeer0Clinic
     peer lifecycle chaincode install ${CC_NAME}.tar.gz
-    echo "===================== Chaincode is installed on peer0.hospital ===================== "
+    echo "===================== Chaincode is installed on peer0.clinic ===================== "
 
-    setGlobalsForPeer0InsuranceCompany
+    setGlobalsForPeer0ClinicManagement
     peer lifecycle chaincode install ${CC_NAME}.tar.gz
-    echo "===================== Chaincode is installed on peer0.insurancecompany ===================== "
+    echo "===================== Chaincode is installed on peer0.clinicmanagement ===================== "
     
-    setGlobalsForPeer0Pharmacy
+    setGlobalsForPeer0MedicalStore
     peer lifecycle chaincode install ${CC_NAME}.tar.gz
-    echo "===================== Chaincode is installed on peer0.pharmacy ===================== "
+    echo "===================== Chaincode is installed on peer0.medicalstore ===================== "
 
 }
 
 # installChaincode
 
 queryInstalled() {
-    setGlobalsForPeer0Hospital
+    setGlobalsForPeer0Clinic
     peer lifecycle chaincode queryinstalled >&log.txt
     cat log.txt
     PACKAGE_ID=$(sed -n "/${CC_NAME}_${VERSION}/{s/^Package ID: //; s/, Label:.*$//; p;}" log.txt)
     echo PackageID is ${PACKAGE_ID}
-    echo "===================== Query installed successful on peer0.hospital on channel ===================== "
+    echo "===================== Query installed successful on peer0.clinic on channel ===================== "
 }
 
 # queryInstalled
 
-approveForMyHospital() {
-    setGlobalsForPeer0Hospital
+approveForMyClinic() {
+    setGlobalsForPeer0Clinic
     # set -x
     peer lifecycle chaincode approveformyorg -o localhost:7050 \
         --ordererTLSHostnameOverride orderer.example.com --tls \
@@ -121,24 +121,24 @@ approveForMyHospital() {
         --sequence ${VERSION}
     # set +x
 
-    echo "===================== chaincode approved from Hospital ===================== "
+    echo "===================== chaincode approved from Clinic ===================== "
 
 }
 
-# approveForMyHospital
+# approveForMyClinic
 
 checkCommitReadyness() {
-    setGlobalsForPeer0Hospital
+    setGlobalsForPeer0Clinic
     peer lifecycle chaincode checkcommitreadiness \
         --channelID $CHANNEL_NAME --name ${CC_NAME} --version ${VERSION} \
         --sequence ${VERSION} --output json --init-required
-    echo "===================== checking commit readyness from Hospital ===================== "
+    echo "===================== checking commit readyness from Clinic ===================== "
 }
 
 # checkCommitReadyness
 
-approveForMyInsuranceCompany() {
-    setGlobalsForPeer0InsuranceCompany
+approveForMyClinicManagement() {
+    setGlobalsForPeer0ClinicManagement
 
     peer lifecycle chaincode approveformyorg -o localhost:7050 \
         --ordererTLSHostnameOverride orderer.example.com --tls $CORE_PEER_TLS_ENABLED \
@@ -146,24 +146,24 @@ approveForMyInsuranceCompany() {
         --version ${VERSION} --init-required --package-id ${PACKAGE_ID} \
         --sequence ${VERSION}
 
-    echo "===================== chaincode approved from Insurance Company ===================== "
+    echo "===================== chaincode approved from Clinic Management ===================== "
 }
 
-# approveForMyInsuranceCompany
+# approveForMyClinicManagement
 
 checkCommitReadyness() {
 
-    setGlobalsForPeer0Hospital
+    setGlobalsForPeer0Clinic
     peer lifecycle chaincode checkcommitreadiness --channelID $CHANNEL_NAME \
-        --peerAddresses localhost:7051 --tlsRootCertFiles $PEER0_HOSPITAL_CA \
+        --peerAddresses localhost:7051 --tlsRootCertFiles $PEER0_CLINIC_CA \
         --name ${CC_NAME} --version ${VERSION} --sequence ${VERSION} --output json --init-required
-    echo "===================== checking commit readyness from Hospital ===================== "
+    echo "===================== checking commit readyness from Clinic ===================== "
 }
 
 # checkCommitReadyness
 
-approveForMyPharmacy() {
-    setGlobalsForPeer0Pharmacy
+approveForMyMedicalStore() {
+    setGlobalsForPeer0MedicalStore
 
     peer lifecycle chaincode approveformyorg -o localhost:7050 \
         --ordererTLSHostnameOverride orderer.example.com --tls $CORE_PEER_TLS_ENABLED \
@@ -174,27 +174,27 @@ approveForMyPharmacy() {
     echo "===================== chaincode approved from Clearing House ===================== "
 }
 
-# approveForMyPharmacy
+# approveForMyMedicalStore
 
 checkCommitReadyness() {
 
-    setGlobalsForPeer0Hospital
+    setGlobalsForPeer0Clinic
     peer lifecycle chaincode checkcommitreadiness --channelID $CHANNEL_NAME \
-        --peerAddresses localhost:7051 --tlsRootCertFiles $PEER0_HOSPITAL_CA \
+        --peerAddresses localhost:7051 --tlsRootCertFiles $PEER0_CLINIC_CA \
         --name ${CC_NAME} --version ${VERSION} --sequence ${VERSION} --output json --init-required
-    echo "===================== checking commit readyness from Hospital ===================== "
+    echo "===================== checking commit readyness from Clinic ===================== "
 }
 
 # checkCommitReadyness
 
 commitChaincodeDefination() {
-    setGlobalsForPeer0Hospital
+    setGlobalsForPeer0Clinic
     peer lifecycle chaincode commit -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com \
         --tls $CORE_PEER_TLS_ENABLED --cafile $ORDERER_CA \
         --channelID $CHANNEL_NAME --name ${CC_NAME} \
-        --peerAddresses localhost:7051 --tlsRootCertFiles $PEER0_HOSPITAL_CA \
-        --peerAddresses localhost:9051 --tlsRootCertFiles $PEER0_INSURANCECOMPANY_CA \
-        --peerAddresses localhost:11051 --tlsRootCertFiles $PEER0_PHARMACY_CA \
+        --peerAddresses localhost:7051 --tlsRootCertFiles $PEER0_CLINIC_CA \
+        --peerAddresses localhost:9051 --tlsRootCertFiles $PEER0_CLINICMANAGEMENT_CA \
+        --peerAddresses localhost:11051 --tlsRootCertFiles $PEER0_MEDICALSTORE_CA \
         --version ${VERSION} --sequence ${VERSION} --init-required
 
 }
@@ -202,7 +202,7 @@ commitChaincodeDefination() {
 # commitChaincodeDefination
 
 queryCommitted() {
-    setGlobalsForPeer0Hospital
+    setGlobalsForPeer0Clinic
     peer lifecycle chaincode querycommitted --channelID $CHANNEL_NAME --name ${CC_NAME}
 
 }
@@ -210,14 +210,14 @@ queryCommitted() {
 # queryCommitted
 
 chaincodeInvokeInit() {
-    setGlobalsForPeer0Hospital
+    setGlobalsForPeer0Clinic
     peer chaincode invoke -o localhost:7050 \
         --ordererTLSHostnameOverride orderer.example.com \
         --tls $CORE_PEER_TLS_ENABLED --cafile $ORDERER_CA \
         -C $CHANNEL_NAME -n ${CC_NAME} \
-        --peerAddresses localhost:7051 --tlsRootCertFiles $PEER0_HOSPITAL_CA \
-        --peerAddresses localhost:9051 --tlsRootCertFiles $PEER0_INSURANCECOMPANY_CA \
-        --peerAddresses localhost:11051 --tlsRootCertFiles $PEER0_PHARMACY_CA \
+        --peerAddresses localhost:7051 --tlsRootCertFiles $PEER0_CLINIC_CA \
+        --peerAddresses localhost:9051 --tlsRootCertFiles $PEER0_CLINICMANAGEMENT_CA \
+        --peerAddresses localhost:11051 --tlsRootCertFiles $PEER0_MEDICALSTORE_CA \
         --isInit -c '{"Args":[]}'
 
 }
@@ -225,7 +225,7 @@ chaincodeInvokeInit() {
 # chaincodeInvokeInit
 
 chaincodeInvoke() {
-    setGlobalsForPeer0Hospital
+    setGlobalsForPeer0Clinic
 
     peer chaincode invoke -o localhost:7050 \
         --ordererTLSHostnameOverride orderer.example.com \
@@ -233,15 +233,15 @@ chaincodeInvoke() {
         --cafile $ORDERER_CA \
         -C $CHANNEL_NAME -n ${CC_NAME} \
         --peerAddresses localhost:7051 \
-        --tlsRootCertFiles $PEER0_HOSPITAL_CA \
-        --peerAddresses localhost:9051 --tlsRootCertFiles $PEER0_INSURANCECOMPANY_CA \
+        --tlsRootCertFiles $PEER0_CLINIC_CA \
+        --peerAddresses localhost:9051 --tlsRootCertFiles $PEER0_CLINICMANAGEMENT_CA \
         -c '{"Args":["createTrade", "T2", "GOOGL", "50", "2800", "2024-12-20T12:00:00Z", "Pending"]}'
 }
 
 # chaincodeInvoke
 
 chaincodeQuery() {
-    setGlobalsForPeer0InsuranceCompany
+    setGlobalsForPeer0ClinicManagement
     peer chaincode query -C $CHANNEL_NAME -n ${CC_NAME} -c '{"Args":["queryTrade", "T2"]}'
 
 }
@@ -255,11 +255,11 @@ packageChaincode
 installChaincode
 
 queryInstalled
-approveForMyHospital
+approveForMyClinic
 # checkCommitReadyness
-approveForMyInsuranceCompany
+approveForMyClinicManagement
 # checkCommitReadyness
-approveForMyPharmacy
+approveForMyMedicalStore
 checkCommitReadyness
 
 commitChaincodeDefination
